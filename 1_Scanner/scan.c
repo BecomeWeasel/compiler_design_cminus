@@ -165,13 +165,52 @@ TokenType getToken(void)
            }
          }
          break;
+       case INOVER:
+         if(c=='*')
+         {
+          state=INCOMMENT;
+          save=FALSE;
+         }
+         else 
+         {
+          state=DONE;
+          ungetNextChar();
+          currentToken=OVER;
+         }
+         break;
        case INCOMMENT: // need to modify this
          save = FALSE;
-         if (c == EOF)
+         /*if (c == EOF)
          { state = DONE;
            currentToken = ENDFILE;
          }
          else if (c == '}') state = START;
+         */
+        if(c=='*')
+        {
+          state=INCOMMENT_;
+        }
+        else if( c==EOF)
+        {
+          state=DONE;
+          currentToken=ENDFILE;
+        }
+         break;
+       case INCOMMENT_:
+        save=FALSE;
+        if(c=='/')
+        {
+          state=START;
+        }
+        else if (c == EOF)
+        {
+          state=DONE;
+          currentToken=ENDFILE;
+        }
+        else
+        {
+          state=INCOMMENT;
+        }
          break;
        /*
        case INASSIGN:
@@ -243,6 +282,7 @@ TokenType getToken(void)
            ungetNextChar();
            currentToken=GT;
          }
+         break;
        case DONE:
        default: /* should never happen */
          fprintf(listing,"Scanner Bug: state= %d\n",state);
