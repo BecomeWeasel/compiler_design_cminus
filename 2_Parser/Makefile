@@ -26,7 +26,7 @@ lex.yy.o : lex.yy.c globals.h y.tab.h util.h scan.h
 	$(CC) $(CFLAGS) -c lex.yy.c
 
 y.tab.c : cminus.y
-	yacc -d v cminus.y
+	yacc -d -v cminus.y
 
 y.tab.h : y.tab.c
 
