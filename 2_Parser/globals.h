@@ -62,24 +62,41 @@ extern int lineno; /* source line number for listing */
 /***********   Syntax tree for parsing ************/
 /**************************************************/
 
-typedef enum {StmtK,ExpK} NodeKind;
-typedef enum {IfK,RepeatK,AssignK,ReadK,WriteK} StmtKind;
-typedef enum {OpK,ConstK,IdK} ExpKind;
+typedef enum {StmtK,ExpK,DclK,TypeNK,ParamK} NodeKind;
+typedef enum {CmpK,ItrK,IfK,RetK} StmtKind;
+typedef enum {AssK,IdK,ArrIdK,OpK,ConstK,CallK} ExpKind;
+typedef enum {VarK,ArrVarK,FunK} DclKind;
+typedef enum {TypK} TypKind;
+typedef enum {NonArrPrmK,ArrPrmK} ParamKind;
 
 /* ExpType is used for type checking */
-typedef enum {Void,Integer,Boolean} ExpType;
+typedef enum {Void,Integer,Boolean,IntArray} ExpType;
 
 #define MAXCHILDREN 3
+
+typedef struct arrayAttr{
+  TokenType type;
+  char* name;
+  int size;
+} ArrAttr;
+
 
 typedef struct treeNode
    { struct treeNode * child[MAXCHILDREN];
      struct treeNode * sibling;
      int lineno;
      NodeKind nodekind;
-     union { StmtKind stmt; ExpKind exp;} kind;
+     union { 
+      StmtKind stmt; 
+      ExpKind exp;
+      DclKind dcl;
+      TypKind typ;
+      ParamKind prm; } kind;
      union { TokenType op;
+             TokenType type;
              int val;
-             char * name; } attr;
+             char * name; 
+             ArrAttr arr; } attr;
      ExpType type; /* for type checking of exps */
    } TreeNode;
 
