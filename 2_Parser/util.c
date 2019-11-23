@@ -261,7 +261,7 @@ void printTree(TreeNode *tree)
         fprintf(listing, "While (condition)\n");
         break;
       case IfK:
-        fprintf(listing, "If (condition) (body) else)\n");
+        fprintf(listing, "If (condition) (body) (else)\n");
         break;
       case RetK:
         fprintf(listing, "Return (source)\n");
@@ -285,7 +285,7 @@ void printTree(TreeNode *tree)
                 tree->attr.arr.size);
         break;
       case FunK:
-        fprintf(listing, "Function Declaration: %s\n", tree->attr.name);
+        fprintf(listing, "Function Declaration: %s ", tree->attr.name);
         break;
       default:
         fprintf(listing, "Unknown DelcareNode Kind\n");
@@ -342,14 +342,14 @@ void printTree(TreeNode *tree)
         fprintf(listing, "Array ID\n");
         break;
       case OpK:
-        fprintf(listing, "Operator: ");
+        fprintf(listing, "Op: ");
         printToken(tree->attr.op, "\0");
         break;
       case ConstK:
         fprintf(listing, "Const: %d\n", tree->attr.val);
         break;
       case CallK:
-        fprintf(listing, "Function call(followings are args) : %s\n", tree->attr.name);
+        fprintf(listing, "Function call : %s ,with arguments below\n", tree->attr.name);
         break;
       default:
         fprintf(listing, "Unknown ExpNode kind\n");

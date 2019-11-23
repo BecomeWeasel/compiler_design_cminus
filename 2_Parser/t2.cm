@@ -1,0 +1,6 @@
+/* exanple code */
+void main ()
+{
+	int a, b;
+	c = a + b; /* variable a and b are uninitialized. */
+}

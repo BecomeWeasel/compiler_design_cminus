@@ -1,11 +1,12 @@
 void main(void)
 {
   int i; int x[5];
-
+  int aaa[1234];
+  int function (int a,int b, int c[], int d) { }
   i=0;
   while(i<5)
   {
-    x[i]= input();
+    x[i]=input();
 
     i=i+1;
   }
@@ -19,3 +20,4 @@ void main(void)
     }
   }
 }
+

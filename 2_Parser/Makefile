@@ -8,16 +8,18 @@ CFLAGS =
 
 OBJS = main.o util.o lex.yy.o y.tab.o symtab.o code.o
 
-#OBJS = main.o util.o lex.yy.o y.tab.o symtab.o analyze.o code.o cgen.o
+# OBJS = main.o util.o lex.yy.o y.tab.o symtab.o analyze.o code.o cgen.o
 
 all : cminus
 
 cminus : $(OBJS)
-	$(CC) $(CFLAGS)	$(OBJS) -o $@ -lfl
+	$(CC) $(CFLAGS)	$(OBJS) -o $@ -ll
 
-#main.o : main.c globals.h y.tab.h util.h scan.h parse.h analyze.h cgen.h
-main.o : main.c globals.h y.tab.h util.h scan.h parse.h 
+main.o : main.c globals.h y.tab.h util.h scan.h parse.h analyze.h cgen.h
 	$(CC) $(CFLAGS) -c main.c
+
+# main.o : main.c globals.h y.tab.h util.h scan.h parse.h
+# 	$(CC) $(CFLAGS) -c main.c
 
 util.o : util.c util.h globals.h y.tab.h
 	$(CC) $(CFLAGS) -c util.c
@@ -39,14 +41,14 @@ y.tab.o : y.tab.c globals.h y.tab.h util.h scan.h parse.h
 symtab.o: symtab.c symtab.h
 	$(CC) $(CFLAGS) -c symtab.c
 
-#analyze.o : analyze.c globals.h y.tab.h symtab.h analyze.h
-#	$(CC) $(CFLAGS) -c analyze.c
+# analyze.o : analyze.c globals.h y.tab.h symtab.h analyze.h
+	# $(CC) $(CFLAGS) -c analyze.c
 
 code.o : code.c code.h globals.h y.tab.h
 		$(CC) $(CFLAGS) -c code.c
 
-#cgen.o : cgen.c globals.h y.tab.h symtab.h code.h cgen.h
-#	$(CC) $(CFLAGS) -c cgen.c
+# cgen.o : cgen.c globals.h y.tab.h symtab.h code.h cgen.h
+	# $(CC) $(CFLAGS) -c cgen.c
 
 clean :
 	rm -vf $(OBJS) lex.yy.c y.tab.h y.tab.c cminus
