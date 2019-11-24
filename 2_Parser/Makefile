@@ -13,7 +13,7 @@ OBJS = main.o util.o lex.yy.o y.tab.o symtab.o code.o
 all : cminus
 
 cminus : $(OBJS)
-	$(CC) $(CFLAGS)	$(OBJS) -o $@ -ll
+	$(CC) $(CFLAGS)	$(OBJS) -o $@ -lfl
 
 main.o : main.c globals.h y.tab.h util.h scan.h parse.h analyze.h cgen.h
 	$(CC) $(CFLAGS) -c main.c
