@@ -26,8 +26,8 @@ static int yylex(void); // added 11/2/11 to ensure no conflict with lex
 %token ASSIGN EQ NE LT LE GT GE PLUS MINUS TIMES OVER LPAREN RPAREN LBRACE RBRACE LCURLY RCURLY SEMI COMMA
 %token ERROR
 
-// %nonassoc RPAREN 
-// %nonassoc ELSE
+%nonassoc RPAREN 
+%nonassoc ELSE
 
 
 %% /* Grammar for TINY */
@@ -163,7 +163,7 @@ selection_stmt :IF LPAREN expression RPAREN statement
 }
 | IF LPAREN expression RPAREN statement ELSE statement
 {
-  $$=newStmtNode(IfK);
+  $$=newStmtNode(IfElseK);
   $$->child[0]=$3; //if condition
   $$->child[1]=$5; // if statment;
   $$->child[2]=$7; // else statment;
