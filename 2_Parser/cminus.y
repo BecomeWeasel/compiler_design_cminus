@@ -159,6 +159,7 @@ selection_stmt :IF LPAREN expression RPAREN statement
   $$=newStmtNode(IfK);
   $$->child[0]=$3; //if condition
   $$->child[1]=$5; // if statment;
+  $$->child[2]=NULL;
 }
 | IF LPAREN expression RPAREN statement ELSE statement
 {
